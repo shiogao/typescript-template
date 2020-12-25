@@ -1,11 +1,13 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const outdir = path.resolve(__dirname, "dist")
 
 module.exports = {
   entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -16,6 +18,10 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'dist', "js"),
+    path: outdir,
   },
+  devServer: {
+    contentBase: outdir
+  },
+  plugins: [new HtmlWebpackPlugin()]
 };
